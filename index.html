@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel='stylesheet' href="./assets/css/style.css">
+    <title>Weather Dashboard</title>
+</head>
+
+<body>
+    <header>
+        Weather Dashboard
+    </header>
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-3">
+                    <label>Search for a City</label>
+                    <div class="row">
+                        <input type="text" class="form-control col">
+                        <button type="button" class="btn bg-primary col-2">🔍</button>
+                    </div>
+                </div>
+                <div class="col-9 weather-display" id="">
+                    <div class="one-day card my-2">
+                        <div class="card-body">
+                            <h5 class="card-title">One day</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                    <br>
+                    <h2>5-Day Forecast:</h2>
+                    <br>
+                    <div class="five-day">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="card col mx-2 bg-primary" id="day1">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Day 1</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col mx-2 bg-primary" id="day2">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Day 2</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col mx-2 bg-primary" id="day3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Day 3</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col mx-2 bg-primary" id="day4">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Day 4</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col mx-2 bg-primary" id="day5">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Day 5</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+<script src="./assets/js/script.js"></script>
+
+</html>
