@@ -39,24 +39,31 @@ function genOneDay(data) {
 }
 
 function genFiveDay(data) {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 1; i < 6; i++) {
         let header = document.createElement('h2');
-        header.innerHTML = data.daily[i].temp.day;
+        let icon = document.createElement('img');
+        icon.src = "http://openweathermap.org/img/w/" + data.daily[i].weather[0].icon + ".png";
+        header.innerHTML = moment.unix(data.daily[i].dt).format('M/D/YYYY');
         switch (i) {
-            case 0:
-                dayOne.appendChild(header);
-                break;
             case 1:
-                dayTwo.appendChild(header);
+                dayOne.appendChild(header);
+                dayOne.appendChild(icon);
                 break;
             case 2:
-                dayThree.appendChild(header);
+                dayTwo.appendChild(header);
+                dayTwo.appendChild(icon);
                 break;
             case 3:
+                dayThree.appendChild(header);
+                dayThree.appendChild(icon);
+                break;
+            case 4:
                 dayFour.appendChild(header);
+                dayFour.appendChild(icon);
                 break;
             default:
                 dayFive.appendChild(header);
+                dayFive.appendChild(icon);
         }
     }
 }
