@@ -1,7 +1,8 @@
+//String to hold current city and the API calls
 let city = 'Baltimore';
 let fiveDayApi = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=63c6b2efa092c7a6d9d2e7f1b655bc65";
 let currentDayApi = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=63c6b2efa092c7a6d9d2e7f1b655bc65";
-let currentTemp;
+
 //Variables to hold the html elements that display the data from the api call
 let currentCard = document.getElementById('current-day');
 let dayOne = document.getElementById('day-one');
@@ -13,47 +14,48 @@ let searchHistory = document.getElementById('cities');
 let searchInput = document.getElementById('search-input');
 let searchBtn = document.getElementById('search-btn');
 
+//API call for the current day
 fetch(currentDayApi)
     .then(function(response) {
         return response.json();
     })
     .then(function(da) {
-        //genOneDay(da);
+        genOneDay(da);
         console.log('current: ', da);
     });
 
+//API call for the five day forecast
 fetch(fiveDayApi)
     .then(function(response) {
         return response.json();
     })
     .then(function(da) {
-        //genFiveDay(da);
+        genFiveDay(da);
         console.log('five day: ', da);
     });
 
+//Generate the current day html elements and add them to the page
 function genOneDay(data) {
     let cardHead = document.createElement('h2');
     let tempP = document.createElement('p');
     let humP = document.createElement('p');
     let windP = document.createElement('p');
-    let uv = document.createElement('p');
-    uv.innerHTML = 'UV Index: ' + data.current.uvi;
-    let iconCode = data.current.weather[0].icon;
+    let iconCode = data.weather[0].icon;
     let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
     let icon = document.createElement('img');
     icon.src = iconUrl;
     cardHead.innerHTML = 'Baltimore: ' + moment().format('M/D/YYYY');
-    tempP.innerHTML = 'Temperature: ' + data.current.temp;
-    humP.innerHTML = 'Humidity: ' + data.current.humidity;
-    windP.innerHTML = 'Wind Speed: ' + data.current.wind_speed;
+    tempP.innerHTML = 'Temperature: ' + data.main.temp;
+    humP.innerHTML = 'Humidity: ' + data.main.humidity;
+    windP.innerHTML = 'Wind Speed: ' + data.wind.speed;
     currentCard.appendChild(cardHead);
     currentCard.appendChild(icon);
     currentCard.appendChild(tempP);
     currentCard.appendChild(humP);
     currentCard.appendChild(windP);
-    currentCard.appendChild(uv);
 }
 
+//Generate the five day html elements and add them to the page
 function genFiveDay(data) {
     for (let i = 1; i <= 40; i++) {
         if (i % 8 == 0 || i == 1) {
@@ -103,9 +105,11 @@ function genFiveDay(data) {
     }
 }
 
+//Saves the typed in city to local storage
 function saveCity() {
     let input = searchInput.value;
 
 }
 
+//Attach save city function to the search button
 searchBtn.onclick = saveCity;
