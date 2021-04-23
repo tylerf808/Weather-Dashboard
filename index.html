@@ -17,12 +17,13 @@
     <main>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-3">
+                <div class="col-3" id="search-bar">
                     <label>Search for a City</label>
                     <div class="row">
-                        <input type="text" class="form-control col">
-                        <button type="button" class="btn bg-primary col-2">🔍</button>
+                        <input type="text" class="form-control col" id="search-input">
+                        <button type="button" class="btn bg-primary col-2" id="search-btn">🔍</button>
                     </div>
+                    <div class="col" id="cities"></div>
                 </div>
                 <div class="col-9 weather-display">
                     <div class="card my-2">
@@ -36,27 +37,27 @@
                     <div class="five-day">
                         <div class="container-fluid">
                             <div class="row" id="five-day-row">
-                                <div class="card bg-primary mx-2">
+                                <div class="card bg-primary m-2">
                                     <div class="card-body" id="day-one">
 
                                     </div>
                                 </div>
-                                <div class="card bg-primary mx-2">
+                                <div class="card bg-primary m-2">
                                     <div class="card-body" id="day-two">
 
                                     </div>
                                 </div>
-                                <div class="card bg-primary mx-2">
+                                <div class="card bg-primary m-2">
                                     <div class="card-body" id="day-three">
 
                                     </div>
                                 </div>
-                                <div class="card bg-primary mx-2">
+                                <div class="card bg-primary m-2">
                                     <div class="card-body" id="day-four">
 
                                     </div>
                                 </div>
-                                <div class="card bg-primary mx-2">
+                                <div class="card bg-primary m-2">
                                     <div class="card-body" id="day-five">
 
                                     </div>
