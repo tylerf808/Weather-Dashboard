@@ -34,6 +34,48 @@ fetch(fiveDayApi)
         console.log('five day: ', da);
     });
 
+//Function to get data
+function callAPIs() {
+    //API call for the current day
+    fetch(currentDayApi)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(da) {
+            while (currentCard.firstChild) {
+                currentCard.removeChild(currentCard.firstChild);
+            }
+            genOneDay(da);
+            console.log('current: ', da);
+        });
+
+    //API call for the five day forecast
+    fetch(fiveDayApi)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(da) {
+            while (dayOne.firstChild) {
+                dayOne.removeChild(dayOne.firstChild);
+            }
+            while (dayTwo.firstChild) {
+                dayTwo.removeChild(dayTwo.firstChild);
+            }
+            while (dayThree.firstChild) {
+                dayThree.removeChild(dayThree.firstChild);
+            }
+            while (dayFour.firstChild) {
+                dayFour.removeChild(dayFour.firstChild);
+            }
+            while (dayFive.firstChild) {
+                dayFive.removeChild(dayFive.firstChild);
+            }
+            genFiveDay(da);
+            console.log('five day: ', da);
+        });
+}
+
+
 //Generate the current day html elements and add them to the page
 function genOneDay(data) {
     let cardHead = document.createElement('h2');
@@ -107,9 +149,9 @@ function genFiveDay(data) {
 
 //Saves the typed in city to local storage
 function saveCity() {
-    let input = searchInput.value;
-
+    window.localStorage.setItem("city", searchInput.value);
+    city = searchInput.value;
+    fiveDayApi = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=63c6b2efa092c7a6d9d2e7f1b655bc65";
+    currentDayApi = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=63c6b2efa092c7a6d9d2e7f1b655bc65";
+    callAPIs();
 }
-
-//Attach save city function to the search button
-searchBtn.onclick = saveCity;
