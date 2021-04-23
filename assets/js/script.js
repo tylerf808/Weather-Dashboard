@@ -1,5 +1,6 @@
 //String to hold current city and the API calls
 let city = 'Baltimore';
+let numCities = 1;
 let fiveDayApi = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=63c6b2efa092c7a6d9d2e7f1b655bc65";
 let currentDayApi = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=63c6b2efa092c7a6d9d2e7f1b655bc65";
 
@@ -14,24 +15,22 @@ let searchHistory = document.getElementById('cities');
 let searchInput = document.getElementById('search-input');
 let searchBtn = document.getElementById('search-btn');
 
-//API call for the current day
+//Initial API call for the current day 
 fetch(currentDayApi)
     .then(function(response) {
         return response.json();
     })
     .then(function(da) {
         genOneDay(da);
-        console.log('current: ', da);
     });
 
-//API call for the five day forecast
+//Initial API call for the five day forecast
 fetch(fiveDayApi)
     .then(function(response) {
         return response.json();
     })
     .then(function(da) {
         genFiveDay(da);
-        console.log('five day: ', da);
     });
 
 //Function to get data
@@ -46,7 +45,6 @@ function callAPIs() {
                 currentCard.removeChild(currentCard.firstChild);
             }
             genOneDay(da);
-            console.log('current: ', da);
         });
 
     //API call for the five day forecast
@@ -71,7 +69,6 @@ function callAPIs() {
                 dayFive.removeChild(dayFive.firstChild);
             }
             genFiveDay(da);
-            console.log('five day: ', da);
         });
 }
 
@@ -86,7 +83,7 @@ function genOneDay(data) {
     let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
     let icon = document.createElement('img');
     icon.src = iconUrl;
-    cardHead.innerHTML = 'Baltimore: ' + moment().format('M/D/YYYY');
+    cardHead.innerHTML = city + ': ' + moment().format('M/D/YYYY');
     tempP.innerHTML = 'Temperature: ' + data.main.temp;
     humP.innerHTML = 'Humidity: ' + data.main.humidity;
     windP.innerHTML = 'Wind Speed: ' + data.wind.speed;
@@ -149,8 +146,10 @@ function genFiveDay(data) {
 
 //Saves the typed in city to local storage
 function saveCity() {
-    window.localStorage.setItem("city", searchInput.value);
+    numCities++;
+    window.localStorage.setItem("city" + numCities, searchInput.value);
     city = searchInput.value;
+    city.replace(/\s+/g, '');
     fiveDayApi = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=63c6b2efa092c7a6d9d2e7f1b655bc65";
     currentDayApi = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=63c6b2efa092c7a6d9d2e7f1b655bc65";
     callAPIs();
