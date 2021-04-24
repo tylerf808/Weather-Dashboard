@@ -41,6 +41,7 @@ function callAPIs() {
             return response.json();
         })
         .then(function(da) {
+            //Clear previous data from the card
             while (currentCard.firstChild) {
                 currentCard.removeChild(currentCard.firstChild);
             }
@@ -53,6 +54,7 @@ function callAPIs() {
             return response.json();
         })
         .then(function(da) {
+            //Clear previous data from the cards
             while (dayOne.firstChild) {
                 dayOne.removeChild(dayOne.firstChild);
             }
@@ -96,6 +98,7 @@ function genOneDay(data) {
 
 //Generate the five day html elements and add them to the page
 function genFiveDay(data) {
+    //Since the data is in 3 hour blocks, I need to select just one for every day
     for (let i = 1; i <= 40; i++) {
         if (i % 8 == 0 || i == 1) {
             let header = document.createElement('h2');
@@ -138,7 +141,6 @@ function genFiveDay(data) {
                     dayFive.appendChild(humidity);
                     break;
                 default:
-
             }
         }
     }
@@ -149,6 +151,18 @@ function saveCity() {
     numCities++;
     window.localStorage.setItem("city" + numCities, searchInput.value);
     city = searchInput.value;
+    let newCityDiv = document.createElement('div');
+    let historyLink = document.createElement('a');
+    historyLink.innerHTML = city;
+    historyLink.onclick = function() { //Add small function that changes to city selected from search history
+        city = historyLink.innerHTML;
+        city.replace(/\s+/g, '');
+        fiveDayApi = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=63c6b2efa092c7a6d9d2e7f1b655bc65";
+        currentDayApi = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=63c6b2efa092c7a6d9d2e7f1b655bc65";
+        callAPIs();
+    }
+    newCityDiv.appendChild(historyLink);
+    searchHistory.appendChild(newCityDiv);
     city.replace(/\s+/g, '');
     fiveDayApi = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=63c6b2efa092c7a6d9d2e7f1b655bc65";
     currentDayApi = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=63c6b2efa092c7a6d9d2e7f1b655bc65";
